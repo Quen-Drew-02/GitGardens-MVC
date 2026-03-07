@@ -1,4 +1,7 @@
 using GitGardens.Data;
+using GitGardens.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace GitGardens
@@ -19,6 +22,18 @@ namespace GitGardens
                 );
 
 
+            // Authentication + Authorization
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/Account/Login";
+                });
+
+            builder.Services.AddAuthorization();
+
+            // Password hasher
+            builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -30,14 +45,17 @@ namespace GitGardens
             }
 
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
+
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
-            app.MapStaticAssets();
+            // MVC routig
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}")
+                pattern: "{controller=Account}/{action=Login}/{id?}")
                 .WithStaticAssets();
 
             app.Run();
