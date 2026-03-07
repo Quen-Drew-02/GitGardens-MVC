@@ -6,6 +6,7 @@ namespace GitGardens.Models
     [Table("GardenMetrics")]
     public class GardenMetrics
     {
+        [Key]
         public int MetricId { get; set; }               // Primary key
 
         [Required]
