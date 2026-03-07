@@ -1,3 +1,6 @@
+using GitGardens.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace GitGardens
 {
     public class Program
@@ -8,6 +11,13 @@ namespace GitGardens
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            // Database context
+            builder.Services.AddDbContext<GitGardensDBContext>(options =>
+                options.UseSqlServer(
+                    builder.Configuration.GetConnectionString("DatabaseConnection"))
+                );
+
 
             var app = builder.Build();
 
