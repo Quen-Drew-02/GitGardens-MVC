@@ -1,0 +1,106 @@
+﻿@using GitGardens.Models
+@model Register
+@{
+    ViewData["Title"] = "Register";
+}
+
+@*
+   Title: ASP.NET Core MVC CRUD - NET 6 MVC CRUD  
+   Operations Using Entity Framework Core and SQL Server  
+   Author: Sameer Saini  
+   Date: 3 years ago
+   Date accessed: 05/03/2026
+   Code version : 1  
+   Availability: https://youtu.be/2Cp8Ti_f9Gk?feature=shared
+*@
+
+@*
+   Title: ASP.NET 8 MVC Tutorial for Beginners - C# web development made easy  
+   Operations Using Entity Framework Core and SQL Server  
+   Author: tutorialsEU  
+   Date: 2 years ago
+   Date accessed: 05/03/2026
+   Code version : 1  
+   Availability: https://youtu.be/xuFdrXqpPB0?feature=shared
+*@
+
+@*
+   Title: Form Validations In ASP.NET Core Razor Pages
+          - Model Validations In Razor Pages C   
+   Author: Sameer Saini  
+   Date: 3 years ago
+   Date accessed: 05/03/2026
+   Code version : 1  
+   Availability: https://youtu.be/PtzH6vu91e8?feature=shared
+*@
+
+<div class="container mt-5">
+    <h2 class="text-center">Create User Account</h2>
+
+    @if (TempData["Email"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["Email"]
+        </div>
+    }
+
+    <div class="card shadow-sm p-4">
+        <form asp-action="Register" method="post">
+
+            <!-- Validation Summary -->
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <!-- Full Name -->
+            <div class="form-group mb-3">
+                <label asp-for="FullName" class="form-label">Full Name</label>
+                <input asp-for="FullName" class="form-control"
+                       maxlength="150"
+                       required
+                       placeholder="Enter your Username Please" />
+                <div class="form-text">Required Field (Max 150 characters)</div>
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+
+            <!-- Email -->
+            <div class="form-group mb-3">
+                <label asp-for="Email" class="form-label">Email Address</label>
+                <input asp-for="Email" class="form-control"
+                       maxlength="100"
+                       required
+                       placeholder="Enter your Email Address Please" />
+                <div class="form-text">Must be a valid email format</div>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <!-- Password -->
+            <div class="form-group mb-3">
+                <label asp-for="Password" class="form-label">Password</label>
+                <input asp-for="Password" class="form-control"
+                       minlength="6"
+                       required
+                       placeholder="Create a Strong Password" />
+                <div class="form-text">
+                    Must be at least 6 Characters long
+                </div>
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <!-- Role -->
+            <div class="form-group mb-3">
+                <label asp-for="RoleID" class="form-label">User Role</label>
+                <select asp-for="RoleID" class="form-control">
+                    <option value="1">Admin</option>
+                    <option value="2">User</option>
+                </select>
+                <span asp-validation-for="RoleID" class="text-danger"></span>
+            </div>
+
+
+            <!-- Action Buttons -->
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-primary px-4">Register</button>
+                <a asp-action="Login" class="btn btn-danger">Back to Login</a>
+            </div>
+        </form>
+    </div>
+</div>

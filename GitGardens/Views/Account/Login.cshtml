@@ -1,0 +1,71 @@
+﻿@using GitGardens.Models
+@model Login
+@{
+    ViewData["Title"] = "Login";
+}
+
+
+@*
+   Title: ASP.NET Core MVC CRUD - NET 6 MVC CRUD  
+   Operations Using Entity Framework Core and SQL Server  
+   Author: Sameer Saini  
+   Date: 3 years ago
+   Date accessed: 05/03/2026
+   Code version : 1  
+   Availability: https://youtu.be/2Cp8Ti_f9Gk?feature=shared
+*@
+
+@*
+   Title: ASP.NET 8 MVC Tutorial for Beginners - C# web development made easy  
+   Operations Using Entity Framework Core and SQL Server  
+   Author: tutorialsEU  
+   Date: 2 years ago
+   Date accessed: 05/03/2026
+   Code version : 1  
+   Availability: https://youtu.be/xuFdrXqpPB0?feature=shared
+*@
+
+@*
+   Title: Form Validations In ASP.NET Core Razor Pages
+          - Model Validations In Razor Pages C   
+   Author: Sameer Saini  
+   Date: 3 years ago
+   Date accessed: 05/03/2026
+   Code version : 1  
+   Availability: https://youtu.be/PtzH6vu91e8?feature=shared
+*@
+
+<div class="container mt-5">
+    <h2 class="text-center">Login to Your Account</h2>
+    <div class="card shadow-sm p-4">
+        <form asp-action="Login" method="post">
+            <!-- Validation Summary -->
+            @if (TempData["Fail"] != null)
+            {
+                <div class="alert alert-danger">
+                    @TempData["Fail"]
+                </div>
+            }
+
+            <!-- Email -->
+            <div class="form-group mb-3">
+                <label asp-for="Email" class="form-label">Email Address</label>
+                <input asp-for="Email" class="form-control" placeholder="Enter your Email Please" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <!-- Password -->
+            <div class="form-group mb-3">
+                <label asp-for="Password" class="form-label">Password</label>
+                <input asp-for="Password" class="form-control" type="password" placeholder="Enter your Password Please" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <!-- Buttons -->
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-primary px-4">Login</button>
+                <a asp-action="Register" class="btn btn-secondary px-4">Register</a>
+            </div>
+        </form>
+    </div>
+</div>
