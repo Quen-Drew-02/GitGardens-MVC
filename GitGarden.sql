@@ -53,3 +53,14 @@ Create Table GardenMetrics (
 
     GardenID int not Null Foreign Key References Gardens(GardenID),      -- Reference to the garden
 );
+
+/*User Seed Data Insert*/
+INSERT INTO Users(FullName, Email, Password, RoleID) VALUES
+('Admin', 'admin@gmail.com', 'password', 1),
+('Dean Anthony Pitts', 'Dean@gmail.com', 'password', 2),
+('Shrivar Nikeyi', 'Shriv@gmail.com', 'password', 2),
+('Wandile Simamane', 'Wandile@gmail.com', 'password', 2),
+('Nathan Mark Fraser', 'Nate@gmail.com', 'password', 2),
+('Quen Drew Ramsamy', 'Quen@gmail.com', 'password', 2);
+
+Select * from Users;
