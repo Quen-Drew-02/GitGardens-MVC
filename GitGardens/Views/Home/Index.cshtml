@@ -1,8 +1,32 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+
+@{
     ViewData["Title"] = "Home Page";
+    var userName = User.Identity?.IsAuthenticated == true ? User.Identity.Name : "Guest";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Welcome, @userName</h1>
+    <p class="lead">GitGardens</p>
+
+    @if (User.Identity?.IsAuthenticated == true)
+    {
+        <p class="mt-4">
+            @if (User.IsInRole("User"))
+            {
+                <a class="btn btn-primary btn-lg m-2" asp-controller="User" asp-action="Dashboard">Dashboard</a>
+            }
+            else if (User.IsInRole("Admin"))
+            {
+                <a class="btn btn-primary btn-lg m-2" asp-controller="Admin" asp-action="Dashboard">Dashboard</a>
+            }
+        </p>
+    }
+    else
+    {
+        <p class="mt-4">
+            <a class="btn btn-success btn-lg m-2" asp-controller="Account" asp-action="Login">Login</a>
+            <a class="btn btn-warning btn-lg m-2" asp-controller="Account" asp-action="Register">Register</a>
+        </p>
+    }
 </div>
