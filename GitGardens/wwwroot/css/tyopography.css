@@ -1,0 +1,27 @@
+﻿/* Health Index */
+.display-health {
+    font-weight: 700;
+    font-size: 57px;
+    letter-spacing: -0.25px;
+}
+
+/* Screen Titles */
+.page-title {
+    font-weight: 600;
+    font-size: 28px;
+    color: var(--text-primary);
+}
+
+/* Metric Labels */
+.metric-label {
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--text-secondary);
+}
+
+/* Body Text */
+.body-text {
+    font-weight: 400;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+}

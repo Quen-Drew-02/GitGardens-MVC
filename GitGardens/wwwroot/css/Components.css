@@ -1,0 +1,101 @@
+﻿/* Dashboard */
+
+.card {
+    background-color: var(--card-surface);
+    border: none;
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+}
+
+.card-title {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* Navigation Bar */
+.navbar {
+    background-color: var(--garden-green);
+}
+
+.navbar-brand,
+.nav-link {
+    color: white !important;
+}
+
+
+/* Buttons */
+.btn-primary {
+    background-color: var(--garden-green);
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: var(--garden-green-dark);
+}
+
+
+.btn-warning {
+    background-color: var(--warning);
+}
+
+.btn-danger {
+    background-color: var(--error);
+}
+
+.btn-success {
+    background-color: var(--success);
+}
+
+
+/* Alerts */
+.alert-success {
+    background-color: rgba(46, 204, 113, 0.15);
+    border-left: 4px solid var(--success);
+}
+
+.alert-warning {
+    background-color: rgba(230, 126, 34, 0.15);
+    border-left: 4px solid var(--warning);
+}
+
+.alert-danger {
+    background-color: rgba(192, 57, 43, 0.15);
+    border-left: 4px solid var(--error);
+}
+
+.alert-info {
+    background-color: rgba(52, 152, 219, 0.15);
+    border-left: 4px solid var(--info);
+}
+
+
+/* Forms */
+.form-control {
+    border-radius: 8px;
+    border: 1px solid var(--outline-gray);
+}
+
+.form-control:focus {
+    border-color: var(--garden-green);
+    box-shadow: 0 0 0 0.2rem rgba(45,106,79,0.2);
+}
+
+
+/* Health Index Indicator*/
+.health-good {
+    color: var(--success);
+}
+
+.health-warning {
+    color: var(--warning);
+}
+
+.health-critical {
+    color: var(--error);
+}
+
+
+/* Metric Sliders */
+.metric-slider input[type="range"] {
+    accent-color: var(--garden-green);
+}

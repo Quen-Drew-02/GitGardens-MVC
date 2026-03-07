@@ -1,0 +1,52 @@
+﻿/* Light Theme */
+:root {
+    /*Primary Colours*/
+    --garden-green: #2D6A4F;
+    --garden-green-light: #D8F3DC;
+    --garden-green-dark: #1B4332;
+    /* Surface Colours */
+    --surface-gray: #F8F9FA;
+    --card-surface: #FFFFFF;
+    /* Text Colours */
+    --text-primary: #1A1C1E;
+    --text-secondary: #44474E;
+    /* UI Borders */
+    --outline-gray: #74777F;
+    /* Functional Colours */
+    --warning: #E67E22;
+    --error: #C0392B;
+    --success: #2ECC71;
+    --info: #3498DB;
+    /* Shadows*/
+    --card-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+    /*Primary Colours*/
+    --garden-green: #40916C;
+    --garden-green-light: #1B4332;
+    --garden-green-dark: #081C15;
+    /* Surface Colours */
+    --surface-gray: #121212;
+    --card-surface: #1E1E1E;
+    /* Text Colours */
+    --text-primary: #E6E6E6;
+    --text-secondary: #B0B3B8;
+    /* UI Borders */
+    --outline-gray: #3C4043;
+    /* Functional Colours */
+    --warning: #F39C12;
+    --error: #E74C3C;
+    --success: #2ECC71;
+    --info: #4AA3DF;
+    /* Shadows*/
+    --card-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+/* Global Styles */
+body {
+    background-color: var(--surface-gray);
+    color: var(--text-primary);
+    font-family: "Inter", "Roboto", sans-serif;
+}
