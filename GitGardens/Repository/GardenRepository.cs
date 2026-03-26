@@ -1,6 +1,7 @@
 ﻿using GitGardens.Data;
 using GitGardens.Interface;
 using GitGardens.Models;
+using Microsoft.EntityFrameworkCore;
 
 /*
 Title: ASP.NET Core MVC CRUD - NET 6 MVC CRUD  
@@ -43,6 +44,15 @@ namespace GitGardens.Repository
         public async Task SaveAsync()
         {
         await _context.SaveChangesAsync();
+        }
+
+        // Retrieve User Gardens
+        public async Task<List<Gardens>> GetGardensByUserIDAsync(int userID)
+        {
+            return await _context.Gardens
+                .Where(g => g.UserId == userID)
+                .OrderByDescending(g => g.CreatedAt)
+                .ToListAsync();
         }
 
     }

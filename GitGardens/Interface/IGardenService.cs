@@ -24,5 +24,8 @@ namespace GitGardens.Interface
     public interface IGardenService
     {
         Task CreateGardenAsync(string gardenName, string description, int userID);
+
+        Task<List<Gardens>> GetUserGardensAsync(int userID);
+
     }
 }

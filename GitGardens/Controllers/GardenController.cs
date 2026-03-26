@@ -1,4 +1,5 @@
 ﻿using GitGardens.Interface;
+using GitGardens.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -45,5 +46,32 @@ namespace GitGardens.Controllers
             return RedirectToAction("Index", "Home");
 
         }
+
+        // List of Gardens
+        public async Task<IActionResult> GardenList()
+        {
+            var userIDClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+
+            if (userIDClaim == null)
+            {
+                return Unauthorized();
+            }
+
+            int userID = int.Parse(userIDClaim.Value);
+
+            var gardens = await _gardenService.GetUserGardensAsync(userID);
+
+            var model = gardens.Select(g => new GardenList
+            {
+                GardenID = g.GardenId,
+                GardenName = g.GardenName,
+                Description = g.Description,
+                CreatedAt = g.CreatedAt
+            }).ToList();
+
+            return View(model);
+
+        }
+
     }
 }

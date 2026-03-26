@@ -26,5 +26,8 @@ namespace GitGardens.Interface
     {
         Task AddGardenAsync(Gardens garden);
         Task SaveAsync();
+
+        // Retrieve Gardens by User
+        Task<List<Gardens>> GetGardensByUserIDAsync(int userID);
     }
 }

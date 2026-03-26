@@ -47,5 +47,11 @@ namespace GitGardens.Service
             await _gardenRepository.SaveAsync();
         }
 
+        // Show User Gardens
+        public async Task<List<Gardens>> GetUserGardensAsync(int userID)
+        {
+            return await _gardenRepository.GetGardensByUserIDAsync(userID);
+        }
+
     }
 }
