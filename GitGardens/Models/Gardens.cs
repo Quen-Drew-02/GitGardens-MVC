@@ -10,7 +10,7 @@ namespace GitGardens.Models
         public int GardenId { get; set; }  // Primary Key
 
         [Required]
-        public string UserId { get; set; }           // Foreign key
+        public int UserId { get; set; }           // Foreign key
 
 
         [Required]
