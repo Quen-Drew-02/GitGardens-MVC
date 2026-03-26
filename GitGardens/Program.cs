@@ -1,5 +1,8 @@
 using GitGardens.Data;
+using GitGardens.Interface;
 using GitGardens.Models;
+using GitGardens.Repository;
+using GitGardens.Service;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -33,6 +36,10 @@ namespace GitGardens
 
             // Password hasher
             builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+
+            // Garden
+            builder.Services.AddScoped<IGardenService, GardenService>();
+            builder.Services.AddScoped<IGardenRepository, GardenRepository>();
 
             var app = builder.Build();
 

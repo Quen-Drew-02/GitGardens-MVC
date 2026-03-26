@@ -1,0 +1,44 @@
+﻿@model GitGardens.Models.Gardens
+
+@{
+    ViewData["Title"] = "Create Garden";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center">Create A New Garden</h2>
+
+    @if (TempData["GardenName"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["GardenName"]
+        </div>
+    }
+
+    <div class="card shadow-sm p-4">
+
+        <form asp-action="CreateGarden" asp-controller="Garden" method="post" class="row g-3">
+            <!-- Gardeb Name -->
+            <div class="form-group mb-3">
+                <label asp-for="GardenName" class="form-label">Garden Name</label>
+                <input asp-for="GardenName" class="form-control"
+                       required
+                       placeholder="Please Input the Name of your Garden" />
+                <span asp-validation-for="GardenName" class="text-danger"></span>
+            </div>
+
+            <!-- Decsription of Garden -->
+            <div class="form-group mb-3">
+                <label asp-for="Description" class="form-label">Garden Description</label>
+                <input asp-for="Description" class="form-control"
+                       placeholder="Optional" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <!-- Creation of Garden -->
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-primary">Create Garden</button>
+                <a class="btn btn-danger" asp-action="Index" asp-controller="Home">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
