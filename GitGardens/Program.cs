@@ -41,6 +41,10 @@ namespace GitGardens
             builder.Services.AddScoped<IGardenService, GardenService>();
             builder.Services.AddScoped<IGardenRepository, GardenRepository>();
 
+            //Garden Metrics
+            builder.Services.AddScoped<IGardenMetricsRepository, GardenMetricsRepository>();
+            builder.Services.AddScoped<IGardenMetricsService, GardenMetricsService>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
