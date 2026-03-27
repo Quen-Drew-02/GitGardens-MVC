@@ -15,6 +15,8 @@ namespace GitGardens.Controllers
         _gardenService = gardenService;
         }
 
+        ////////////////////////////////////////////////////////////////Create A Garden//////////////////////////////////////////////////////
+
         // Garden Screen View
         public IActionResult CreateGarden()
         {
@@ -47,6 +49,8 @@ namespace GitGardens.Controllers
 
         }
 
+        ////////////////////////////////////////////////////////////////Read List of User Gardens//////////////////////////////////////////////////////
+
         // List of Gardens
         public async Task<IActionResult> GardenList()
         {
@@ -70,6 +74,67 @@ namespace GitGardens.Controllers
             }).ToList();
 
             return View(model);
+
+        }
+
+
+        ////////////////////////////////////////////////////////////////Edit Garden Details//////////////////////////////////////////////////////
+
+        // Pull in Garden Details
+        public async Task<IActionResult> EditGarden(int id)
+        {
+            var userIDClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+
+            if (userIDClaim == null)
+            {
+                return Unauthorized();
+            }
+
+            int userID = int.Parse(userIDClaim.Value);
+
+            var garden = await _gardenService.GetGardenForEditAsync(id, userID);
+
+            if(garden == null)
+            {
+                return NotFound();
+            }
+
+            var model = new EditGarden
+            {
+                GardenID = garden.GardenId,
+                GardenName = garden.GardenName,
+                Description = garden.Description,
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditGarden(EditGarden model)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var userIDClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+
+            if (userIDClaim == null)
+            {
+                return Unauthorized();
+            }
+
+            int userID = int.Parse(userIDClaim.Value);
+
+            var success = await _gardenService.UpdateGardenAsync(model.GardenID, model.GardenName, model.Description, userID);
+
+            if (!success)
+            {
+                return Unauthorized();
+            }
+
+            return RedirectToAction("GardenList", "Garden");
 
         }
 

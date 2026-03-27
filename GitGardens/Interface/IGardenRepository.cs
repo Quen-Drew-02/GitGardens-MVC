@@ -29,5 +29,10 @@ namespace GitGardens.Interface
 
         // Retrieve Gardens by User
         Task<List<Gardens>> GetGardensByUserIDAsync(int userID);
+
+
+        // Edit Garden Details
+        Task<Gardens?> GetGardenByIDAsync(int GardenID);
+        Task UpdateGardenAsync(Gardens garden);
     }
 }

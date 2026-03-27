@@ -53,5 +53,41 @@ namespace GitGardens.Service
             return await _gardenRepository.GetGardensByUserIDAsync(userID);
         }
 
+        // Pull In Existing User Garden Details
+        public async Task<Gardens?> GetGardenForEditAsync(int gardenID, int userID)
+        {
+            var garden = await _gardenRepository.GetGardenByIDAsync(gardenID);
+
+            // Ownership Validation
+            if (garden == null || garden.UserId != userID)
+            {
+                return null;
+            }
+
+            return garden;
+
+        }
+
+        // Update Garden Details
+        public async Task<bool> UpdateGardenAsync(int gardenID, string name, string description, int userID)
+        {
+            var garden = await _gardenRepository.GetGardenByIDAsync(gardenID);
+
+            if (garden == null || garden.UserId != userID)
+            {
+                return false;
+            }
+
+            garden.GardenName = name;
+            garden.Description = description;
+            garden.UpdatedAt = DateTime.Now;
+
+            await _gardenRepository.UpdateGardenAsync(garden);
+            await _gardenRepository.SaveAsync();
+
+            return true;
+
+        }
+
     }
 }

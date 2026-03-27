@@ -55,5 +55,17 @@ namespace GitGardens.Repository
                 .ToListAsync();
         }
 
+        // Retreieve Garden Details
+        public async Task<Gardens?> GetGardenByIDAsync(int gardenID)
+        {
+            return await _context.Gardens.FirstOrDefaultAsync(g => g.GardenId == gardenID);
+        }
+
+        // Update Garden Details
+        public async Task UpdateGardenAsync(Gardens garden)
+        {
+            _context.Gardens.Update(garden);
+        }
+
     }
 }
