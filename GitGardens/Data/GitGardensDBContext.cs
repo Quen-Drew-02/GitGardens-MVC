@@ -13,7 +13,7 @@ namespace GitGardens.Data
         public DbSet<Role> Roles { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Gardens> Gardens { get; set; }
-        public DbSet<GardenMetrics> GardenMatrics { get; set; }
+        public DbSet<GardenMetrics> GardenMetrics { get; set; }
 
     }
 }

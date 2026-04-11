@@ -1,0 +1,38 @@
+@model GitGardens.Models.GardenMetrics
+
+@{
+    ViewData["Title"] = "Add Metrics";
+}
+
+<h2>Add Metrics</h2>
+
+<form asp-action="Create" method="post">
+    <input type="hidden" asp-for="GardenId" />
+
+    <div>
+        <label asp-for="Moisture"></label>
+        <input asp-for="Moisture" />
+    </div>
+    <div>
+        <label asp-for="PH"></label>
+        <input asp-for="PH" />
+    </div>
+    <div>
+        <label asp-for="Temperature"></label>
+        <input asp-for="Temperature" />
+    </div>
+    <div>
+        <label asp-for="Humidity"></label>
+        <input asp-for="Humidity" />
+    </div>
+    <div>
+        <label asp-for="Sunlight"></label>
+        <input asp-for="Sunlight" />
+    </div>
+    <div>
+        <label asp-for="Nitrogen"></label>
+        <input asp-for="Nitrogen" />
+    </div>
+
+    <button type="submit">Submit Metrics</button>
+</form>

@@ -1,0 +1,62 @@
+@model GitGardens.Models.Gardens
+
+@{
+    ViewData["Title"] = Model.GardenName;
+}
+
+<h2>@Model.GardenName</h2>
+<p>@Model.Description</p>
+
+<p>
+    <a asp-controller="GardenMetrics" asp-action="Create" asp-route-gardenId="@Model.GardenId">Add Metrics</a>
+</p>
+
+@if (TempData["MetricTips"] != null)
+{
+    var tips = (TempData["MetricTips"] as string).Split(new[] { "||" }, System.StringSplitOptions.RemoveEmptyEntries);
+    <div>
+        <h3>Metric Tips</h3>
+        <ul>
+            @foreach (var t in tips)
+            {
+                <li>@t</li>
+            }
+        </ul>
+    </div>
+}
+
+<h4>Recent Metrics</h4>
+@if (Model.GardenMetrics != null && Model.GardenMetrics.Any())
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Recorded</th>
+                <th>Moisture</th>
+                <th>pH</th>
+                <th>Temp</th>
+                <th>Humidity</th>
+                <th>Sunlight</th>
+                <th>N</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var m in Model.GardenMetrics)
+            {
+                <tr>
+                    <td>@m.RecordedAt</td>
+                    <td>@m.Moisture</td>
+                    <td>@m.PH</td>
+                    <td>@m.Temperature</td>
+                    <td>@m.Humidity</td>
+                    <td>@m.Sunlight</td>
+                    <td>@m.Nitrogen</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No metrics recorded yet.</p>
+}
