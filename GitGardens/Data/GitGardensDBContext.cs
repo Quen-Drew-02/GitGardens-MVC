@@ -14,6 +14,5 @@ namespace GitGardens.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Gardens> Gardens { get; set; }
         public DbSet<GardenMetrics> GardenMetrics { get; set; }
-
     }
 }
