@@ -138,5 +138,62 @@ namespace GitGardens.Controllers
 
         }
 
+
+
+        ////////////////////////////////////////////////////////////////Delete Garden Details//////////////////////////////////////////////////////
+        public async Task<IActionResult> DeleteGarden(int id)
+        {
+            var userIDClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+
+            if (userIDClaim == null)
+            {
+                return Unauthorized();
+            }
+
+            int userID = int.Parse(userIDClaim.Value);
+
+            //Verify Ownership and Pull in Garden Details for Confirmation
+            var garden = await _gardenService.GetGardenForEditAsync(id, userID);
+
+            if (garden == null)
+            {
+                return NotFound();
+            }
+
+            // Creating a new instance of the DeleteGarden model to pass to the view
+            var model = new DeleteGarden
+            {
+                GardenId = garden.GardenId,
+                GardenName = garden.GardenName,
+                Description = garden.Description
+            };
+
+            return View(model);
+        }
+
+        [HttpPost, ActionName("DeleteGarden")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int GardenId)
+        {
+            var userIDClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+
+            // Ensure User is Authenticated (logged in) before attempting deletion
+            if (userIDClaim == null)
+            {
+                return Unauthorized();
+            }
+
+            int userID = int.Parse(userIDClaim.Value);
+
+            var success = await _gardenService.DeleteGardenAsync(GardenId, userID);
+
+            // Ownership Validation and Deletion Result Check
+            if (!success)
+            { 
+                return Unauthorized();
+            }
+
+            return RedirectToAction("GardenList", "Garden");
+        }
     }
 }
