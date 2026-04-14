@@ -67,5 +67,11 @@ namespace GitGardens.Repository
             _context.Gardens.Update(garden);
         }
 
+        // Delete Gardens from the Database
+        public async Task DeleteGardenAsync(Gardens garden)
+        {
+            _context.Gardens.Remove(garden);
+        }
+
     }
 }
