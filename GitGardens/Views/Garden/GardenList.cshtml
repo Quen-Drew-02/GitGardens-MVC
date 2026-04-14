@@ -48,11 +48,18 @@
                             </a>
 
                             <!-- Metrics -->
-                            <a class="btn btn-primary btn-sm"
+                            <a class="btn btn-primary btn-sm me-2"
                                    asp-controller="GardenMetrics"
                                    asp-action="PostMetric"
                                    asp-route-gardenId="@garden.GardenID">
                                    Metrics
+                            </a>
+
+                            <a class="btn btn-danger btn-sm"
+                                   asp-controller="Garden"
+                                   asp-action="DeleteGarden"
+                                   asp-route-id="@garden.GardenID">
+                                   Delete
                             </a>
 
                         </div>
