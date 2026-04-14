@@ -89,5 +89,22 @@ namespace GitGardens.Service
 
         }
 
+        // Delete Garden
+        public async Task<bool> DeleteGardenAsync(int gardenID, int userID)
+        {
+            var garden = await _gardenRepository.GetGardenByIDAsync(gardenID);
+
+            // Ownership Validation
+            if (garden == null || garden.UserId != userID)
+            {
+                return false;
+            }
+
+            // Delete Garden and Save Changes
+            await _gardenRepository.DeleteGardenAsync(garden);
+            await _gardenRepository.SaveAsync();
+
+            return true;
+        }
     }
 }
