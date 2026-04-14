@@ -33,5 +33,7 @@ namespace GitGardens.Interface
         Task<Gardens?> GetGardenForEditAsync(int gardenID, int userID);
         Task<bool> UpdateGardenAsync(int gardenID, string name, string description, int userID);
 
+        // Delete Gardens
+        Task<bool> DeleteGardenAsync(int gardenID, int userID);
     }
 }

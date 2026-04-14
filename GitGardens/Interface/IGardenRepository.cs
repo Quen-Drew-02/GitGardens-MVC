@@ -34,5 +34,8 @@ namespace GitGardens.Interface
         // Edit Garden Details
         Task<Gardens?> GetGardenByIDAsync(int GardenID);
         Task UpdateGardenAsync(Gardens garden);
+
+        // Delete Gardens 
+        Task DeleteGardenAsync(Gardens garden);
     }
 }
