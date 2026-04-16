@@ -9,10 +9,12 @@ namespace GitGardens.Controllers
     public class GardenController : Controller
     {
         private readonly IGardenService _gardenService;
+        private readonly IWeatherApiService _weatherApiService;
 
-        public GardenController(IGardenService gardenService)
+        public GardenController(IGardenService gardenService, IWeatherApiService weatherService)
         {
         _gardenService = gardenService;
+            _weatherApiService = weatherService;
         }
 
         ////////////////////////////////////////////////////////////////Create A Garden//////////////////////////////////////////////////////
@@ -136,6 +138,15 @@ namespace GitGardens.Controllers
 
             return RedirectToAction("GardenList", "Garden");
 
+        }
+     
+        public async Task<IActionResult> Details(int id)
+        {
+            //e.g. to weather for durban north when viewing a garden
+            var weather = await _weatherApiService.GetWeatherAsync("Durban North");
+            ViewBag.Weather = weather;
+
+            return View();
         }
 
     }
