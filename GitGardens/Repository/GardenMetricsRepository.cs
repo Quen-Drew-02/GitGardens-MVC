@@ -1,6 +1,7 @@
 ﻿using GitGardens.Data;
 using GitGardens.Interface;
 using GitGardens.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace GitGardens.Repository
 {
@@ -24,6 +25,16 @@ namespace GitGardens.Repository
         {
             await _context.SaveChangesAsync();
         }
+
+        // Get Latest Metrics for a Garden
+        public async Task<GardenMetrics?> GetLatestMetricsAsync(int gardenID)
+        {
+            return await _context.GardenMetrics
+                .Where(m => m.GardenID == gardenID)
+                .OrderByDescending(m => m.RecordedAt)
+                .FirstOrDefaultAsync();
+        }
+
 
     }
 }

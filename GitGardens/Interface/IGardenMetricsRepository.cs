@@ -22,6 +22,8 @@ namespace GitGardens.Interface
     */
     public interface IGardenMetricsRepository
     {
+        // Fetch the values of the latest metrics for a specific garden
+        Task<GardenMetrics?> GetLatestMetricsAsync(int gardenID);
         Task AddMetricAsync(GardenMetrics metrics);
         Task SaveAsync();
     }

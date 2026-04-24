@@ -1,4 +1,6 @@
-﻿namespace GitGardens.Interface
+﻿using GitGardens.Models;
+
+namespace GitGardens.Interface
 {
 
     /*
@@ -22,6 +24,9 @@
 
     public interface IGardenMetricsService
     {
+        // Fetch the values of the latest metrics for a specific garden
+        Task<GardenMetrics?> GetLatestMetricsAsync(int gardenID);
+
         Task<bool> AddMetricAsync(int gardenID, int userID,
             decimal moisture, 
             decimal ph, 

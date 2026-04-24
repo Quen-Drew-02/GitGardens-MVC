@@ -66,5 +66,11 @@ namespace GitGardens.Service
 
         }
 
+        // Fetch the values of the latest metrics for a specific garden
+        public async Task<GardenMetrics?> GetLatestMetricsAsync(int gardenID)
+        {
+            return await _metricsRepository.GetLatestMetricsAsync(gardenID);
+        }
+
     }
 }
