@@ -55,6 +55,13 @@
                                    Metrics
                             </a>
 
+                            <a class="btn btn-danger btn-sm"
+                                   asp-controller="Garden"
+                                   asp-action="DeleteGarden"
+                                   asp-route-id="@garden.GardenID">
+                                Delete
+                            </a>
+
                             <!-- Tips based on Metrics -->
                             <a class="btn btn-info btn-sm"
                                    asp-controller="GardenTips"
