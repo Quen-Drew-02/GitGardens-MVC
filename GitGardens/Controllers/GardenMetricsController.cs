@@ -36,11 +36,22 @@ namespace GitGardens.Controllers
         }
 
 
-        public IActionResult PostMetric(int gardenID)
+        // GET: GardenMetrics/PostMetric?gardenID=5
+        public async Task<IActionResult> PostMetric(int gardenID)
         {
+            // Fetch the last recorded data for this specific garden
+            var latest = await _metricsService.GetLatestMetricsAsync(gardenID);
+
+            // Populate the ViewModel with existing data or default values if none exist
             var model = new AddGardenMetric
             {
-                GardenID = gardenID
+                GardenID = gardenID,
+                Moisture = latest?.Moisture ?? 50,
+                PH = latest?.PH ?? 6.5m,
+                Temperature = latest?.Temperature ?? 22,
+                Humidity = latest?.Humidity ?? 50,
+                Sunlight = latest?.Sunlight ?? 50,
+                Nitrogen = latest?.Nitrogen ?? 50
             };
 
             return View(model);
