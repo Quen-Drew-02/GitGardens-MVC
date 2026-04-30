@@ -70,7 +70,11 @@ namespace GitGardens.Controllers
                 GardenID = g.GardenId,
                 GardenName = g.GardenName,
                 Description = g.Description,
-                CreatedAt = g.CreatedAt
+                CreatedAt = g.CreatedAt,
+                // No 'await' needed here now!
+                HealthScore = g.GardenMetrics != null && g.GardenMetrics.Any()
+            ? _gardenService.CalculateHealthScore(g.GardenMetrics.OrderByDescending(m => m.RecordedAt).First())
+            : 0
             }).ToList();
 
             return View(model);

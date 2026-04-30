@@ -111,19 +111,19 @@ namespace GitGardens.Service
         {
             if (metrics == null) return 0;
 
-            double score = 0;
+            decimal score = 0;
 
-            //Target Moisture : 50%
-            score += Math.Max(0, 20 - (double)Math.Abs(metrics.Moisture - 50));
+            // Moisture (Target 50%)
+            score += Math.Max(0, 20 - Math.Abs(metrics.Moisture - 50));
 
-            //Target PH : 6.5
-            score += Math.Max(0, 20 - (double)Math.Abs(metrics.PH - 6.5m) * 10);
+            // PH (Target 6.5)
+            score += Math.Max(0, 20 - (Math.Abs(metrics.PH - 6.5m) * 10));
 
-            //Target Temperature : 22°C
-            score += Math.Max(0, 20 - (double)Math.Abs(metrics.Temperature - 22));
+            // Temperature (Target 22°C)
+            score += Math.Max(0, 20 - Math.Abs(metrics.Temperature - 22));
 
-            // Targert nitrogen and humiditu
-            score += 40; // Base score for other factors
+            // Add Nitrogen and Humidity factors...
+            score += 40;
 
             return (int)Math.Clamp(score, 0, 100);
         }
