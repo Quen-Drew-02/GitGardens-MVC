@@ -50,6 +50,7 @@ namespace GitGardens.Repository
         public async Task<List<Gardens>> GetGardensByUserIDAsync(int userID)
         {
             return await _context.Gardens
+                .Include(g => g.GardenMetrics) // Include related GardenMetrics
                 .Where(g => g.UserId == userID)
                 .OrderByDescending(g => g.CreatedAt)
                 .ToListAsync();
