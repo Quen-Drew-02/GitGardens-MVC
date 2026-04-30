@@ -106,5 +106,26 @@ namespace GitGardens.Service
 
             return true;
         }
+
+        public int CalculateHealthScore(GardenMetrics metrics)
+        {
+            if (metrics == null) return 0;
+
+            double score = 0;
+
+            //Target Moisture : 50%
+            score += Math.Max(0, 20 - (double)Math.Abs(metrics.Moisture - 50));
+
+            //Target PH : 6.5
+            score += Math.Max(0, 20 - (double)Math.Abs(metrics.PH - 6.5m) * 10);
+
+            //Target Temperature : 22°C
+            score += Math.Max(0, 20 - (double)Math.Abs(metrics.Temperature - 22));
+
+            // Targert nitrogen and humiditu
+            score += 40; // Base score for other factors
+
+            return (int)Math.Clamp(score, 0, 100);
+        }
     }
 }
