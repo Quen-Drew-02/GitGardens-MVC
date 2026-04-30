@@ -27,6 +27,24 @@
 
                         <h5 class="card-title">@garden.GardenName</h5>
 
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <span class="small fw-bold">Garden Health</span>
+                                    <span class="badge @(garden.HealthScore > 70 ? "bg-success" : garden.HealthScore > 40 ? "bg-warning" : "bg-danger")">
+                                        @garden.HealthScore%
+                                    </span>
+                                </div>
+                                <div class="progress" style="height: 10px;">
+                                    <div class="progress-bar @(garden.HealthScore > 70 ? "bg-success" : garden.HealthScore > 40 ? "bg-warning" : "bg-danger")"
+                                         role="progressbar"
+                                         style="width: @garden.HealthScore%;"
+                                         aria-valuenow="@garden.HealthScore"
+                                         aria-valuemin="0"
+                                         aria-valuemax="100">
+                                    </div>
+                                </div>
+                            </div>
+
                         <p class="body-text">
                             @(string.IsNullOrEmpty(garden.Description)
                                 ? "No Description Provided"

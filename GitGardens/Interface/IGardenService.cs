@@ -37,6 +37,6 @@ namespace GitGardens.Interface
         Task<bool> DeleteGardenAsync(int gardenID, int userID);
 
         //Health Score
-        int CalculateHealthScoreAsync(GardenMetrics metrics);
+        int CalculateHealthScore(GardenMetrics metrics);
     }
 }
