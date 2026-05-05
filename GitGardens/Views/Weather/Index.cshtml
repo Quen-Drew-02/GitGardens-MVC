@@ -1,0 +1,66 @@
+﻿@model GitGardens.Models.ExternalWeatherResponse
+
+@{
+    ViewData["Title"] = "Garden Weather";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">🌱 Garden Weather</h2>
+
+    @* Search Bar *@
+    <form method="get" asp-action="Index" asp-controller="Weather" class="d-flex gap-2 mb-4 justify-content-center">
+        <input type="text" name="city" class="form-control w-50"
+               placeholder="Search city..."
+               value="@ViewBag.City" />
+        <button type="submit" class="btn btn-success">🔍 Search</button>
+    </form>
+
+    @* Error Message *@
+    @if (TempData["WeatherError"] != null)
+    {
+        <div class="alert alert-warning text-center">@TempData["WeatherError"]</div>
+    }
+
+    @* Weather Card *@
+    @if (Model?.Name != null)
+    {
+        <div class="card shadow p-4 mx-auto" style="max-width: 500px;">
+
+            @* City Name *@
+            <h3 class="text-center mb-3">📍 @Model.Name</h3>
+
+            @* Weather Icon + Description *@
+            @if (Model.Weather != null && Model.Weather.Any())
+            {
+                <div class="text-center">
+                    <img src="@($"https://openweathermap.org/img/wn/{Model.Weather[0].Icon}@2x.png")"
+                         alt="@Model.Weather[0].Description"
+                         width="80" />
+                    <p class="text-muted text-capitalize fs-5">@Model.Weather[0].Description</p>
+                </div>
+            }
+
+            @* Temperature *@
+            <p class="display-4 fw-bold text-center text-success">@Model.Main.Temp °C</p>
+
+            <hr />
+
+            @* Stats Row *@
+            <div class="row text-center mt-2">
+                <div class="col-4">
+                    <p class="mb-1">🌡️ Feels Like</p>
+                    <strong>@Model.Main.FeelsLike °C</strong>
+                </div>
+                <div class="col-4">
+                    <p class="mb-1">💧 Humidity</p>
+                    <strong>@Model.Main.Humidity%</strong>
+                </div>
+                <div class="col-4">
+                    <p class="mb-1">💨 Wind</p>
+                    <strong>@Model.Wind?.Speed m/s</strong>
+                </div>
+            </div>
+
+        </div>
+    }
+</div>

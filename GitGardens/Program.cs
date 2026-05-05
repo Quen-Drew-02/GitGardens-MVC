@@ -22,7 +22,7 @@ namespace GitGardens
             // Database context
             builder.Services.AddDbContext<GitGardensDBContext>(options =>
                 options.UseSqlServer(
-                    builder.Configuration.GetConnectionString("DatabaseConnection"))
+                    builder.Configuration.GetConnectionString("DatabaseConnection1"))
                 );
 
 
