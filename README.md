@@ -172,8 +172,6 @@ A weighted scoring model based on environmental inputs:
 - [x] Garden List Dashboard (Card UI)
 - [x] Add Garden Metrics (Slider UI)
 - [ ] **Next**: Garden Health Index Dashboard
-- [ ] Data Visualization (Charts & Trends)
-- [ ] AI-Based Predictive Insights
 - [ ] Mobile Companion App (Future Expansion)
 
 ---
