@@ -154,15 +154,15 @@ namespace GitGardens.Controllers
             // Sign user in by creating an Authenticatoon Cookie
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
 
-            return RedirectToAction("CreateGarden", "Garden");
+            return RedirectToAction("Index", "Dashboard");
 
             // Redirect Users Based of Role
             switch (user.Role.RoleName)
             {
                 case "Admin":
-                    return RedirectToAction("Dashboard", "Admin");
+                    return RedirectToAction("Index", "Dashboard");
                 case "User":
-                    return RedirectToAction("Dashboard", "User");
+                    return RedirectToAction("Index", "Dashboard");
                 default:
                     return RedirectToAction("Index", "Home");
             }

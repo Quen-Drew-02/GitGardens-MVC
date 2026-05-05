@@ -14,11 +14,11 @@
         <p class="mt-4">
             @if (User.IsInRole("User"))
             {
-                <a class="btn btn-primary btn-lg m-2" asp-controller="User" asp-action="Dashboard">Dashboard</a>
+                <a class="btn btn-primary btn-lg m-2" asp-controller="Dashboard" asp-action="Index">Dashboard</a>
             }
             else if (User.IsInRole("Admin"))
             {
-                <a class="btn btn-primary btn-lg m-2" asp-controller="Admin" asp-action="Dashboard">Dashboard</a>
+                <a class="btn btn-primary btn-lg m-2" asp-controller="Dashboard" asp-action="Index">Dashboard</a>
             }
         </p>
     }
