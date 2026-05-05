@@ -180,6 +180,15 @@ namespace GitGardens.Controllers
 
         //////////////////////////////////////////////////////////Edit Profile//////////////////////////////////////////////////////////
 
+        /*
+        Title: Disclosure of AI Usage in my Assessment.
+        • Section: EditProfile & DeleteProfile.
+        • AI Tool: Gemini
+        • Purpose/intention : Design and framework of EditProfile & DeleteProfile functionalities.
+        • Date(s) 05/05/2026.
+        • https://gemini.google.com/share/75f6e6bedd8e
+        */
+
         [Authorize]
         [HttpGet]
         public async Task<IActionResult> EditProfile()
@@ -211,7 +220,7 @@ namespace GitGardens.Controllers
 
             if (user == null) return NotFound();
 
-            // Update name
+            
             user.FullName = model.FullName;
 
             // Only update password if the user typed something in that box
