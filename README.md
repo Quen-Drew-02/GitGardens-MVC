@@ -173,7 +173,7 @@ A weighted scoring model based on environmental inputs:
 - [x] Garden CRUD (Create, Read, Update)
 - [x] Garden List Dashboard (Card UI)
 - [x] Add Garden Metrics (Slider UI)
-- [ ] **Next**: Garden Health Index Dashboard
+- [x] Garden Health Index Dashboard
 - [ ] Mobile Companion App (Future Expansion)
 
 ---
