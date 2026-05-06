@@ -10,7 +10,7 @@ namespace GitGardens.Models
         public int MetricId { get; set; }               // Primary key
 
         [Required]
-        public int GardenId { get; set; }            // Foreign key
+        public int GardenID { get; set; }            // Foreign key
 
         public decimal Moisture { get; set; }      // Soil moisture Percentage
 
@@ -28,7 +28,7 @@ namespace GitGardens.Models
         public DateTime RecordedAt { get; set; }
 
         [ForeignKey("GardenID")]
-        public Gardens Gardens { get; set; }                  // Navigation Property to Parent Garden
+        public Gardens? Gardens { get; set; }                  // Navigation Property to Parent Garden
 
     }
 }

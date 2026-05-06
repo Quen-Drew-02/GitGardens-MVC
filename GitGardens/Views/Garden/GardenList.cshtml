@@ -1,0 +1,126 @@
+﻿@model List<GitGardens.Models.GardenList>
+
+@{
+    ViewData["Title"] = "My Gardens";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center">My Gardens</h2>
+        <div class="card shadow-sm p-4">
+
+    <div class="row">
+
+        @if (!Model.Any())
+        {
+            <div class="col-12">
+                <div class="alert alert-info">
+                    You have no gardens Yet + Create one to get Going
+                </div>
+            </div>
+        }
+        else
+        {
+            @foreach (var garden in Model)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card p-3 h-100">
+
+                        <h5 class="card-title">@garden.GardenName</h5>
+
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <span class="small fw-bold">Garden Health</span>
+                                    <span class="badge @(garden.HealthScore > 70 ? "bg-success" : garden.HealthScore > 40 ? "bg-warning" : "bg-danger")">
+                                        @garden.HealthScore%
+                                    </span>
+                                </div>
+                                <div class="progress" style="height: 10px;">
+                                    <div class="progress-bar @(garden.HealthScore > 70 ? "bg-success" : garden.HealthScore > 40 ? "bg-warning" : "bg-danger")"
+                                         role="progressbar"
+                                         style="width: @garden.HealthScore%;"
+                                         aria-valuenow="@garden.HealthScore"
+                                         aria-valuemin="0"
+                                         aria-valuemax="100">
+                                    </div>
+                                </div>
+                            </div>
+
+                        <p class="body-text">
+                            @(string.IsNullOrEmpty(garden.Description)
+                                ? "No Description Provided"
+                                : garden.Description)
+                        </p>
+
+                        <small class="text-muted">
+                            Created: @garden.CreatedAt.ToShortDateString()
+                        </small>
+
+                        <div class="mt-3">
+
+                            <!-- Edit Garden -->
+                            <a class="btn btn-warning btn-sm me-2"
+                                   asp-controller="Garden"
+                                   asp-action="EditGarden"
+                                   asp-route-id="@garden.GardenID">
+                                   Edit
+                            </a>
+
+                            <!-- Metrics -->
+                            <a class="btn btn-primary btn-sm me-2"
+                                   asp-controller="GardenMetrics"
+                                   asp-action="PostMetric"
+                                   asp-route-gardenId="@garden.GardenID">
+                                   Metrics
+                            </a>
+
+                            <a class="btn btn-danger btn-sm"
+                                   asp-controller="Garden"
+                                   asp-action="DeleteGarden"
+                                   asp-route-id="@garden.GardenID">
+                                Delete
+                            </a>
+
+                            <!-- Tips based on Metrics -->
+                            <a class="btn btn-info btn-sm"
+                                   asp-controller="GardenTips"
+                                   asp-action="GetTips"
+                                   asp-route-gardenId="@garden.GardenID">
+                                   Tips
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+            }
+        </div>
+    </div>
+</div>
+
+@*
+   Title: ASP.NET 8 MVC Tutorial for Beginners - C# web development made easy  
+   Operations Using Entity Framework Core and SQL Server  
+   Author: tutorialsEU  
+   Date: 1 years ago
+   Date Accessed: 26/03/26
+   Code version : 1  
+   Availability: https://youtu.be/xuFdrXqpPB0?feature=shared
+*@
+
+@*
+   Title: Form Validations In ASP.NET Core Razor Pages
+          - Model Validations In Razor Pages C   
+   Author: Sameer Saini  
+   Date: 2 years ago
+   Date Accessed: 26/03/26
+   Code version : 1  
+   Availability: https://youtu.be/PtzH6vu91e8?feature=shared
+*@
+
+@*
+   Title: C# Core Web Application Activity 3c Bootsrap Card Layout 
+   Author: Programming w/Professor sluiter  
+   Date: 4 years ago
+   Date Accessed: 26/03/26
+   Code version : 1  
+   Availability: https://youtu.be/492iyhefwhM?feature=shared
+*@

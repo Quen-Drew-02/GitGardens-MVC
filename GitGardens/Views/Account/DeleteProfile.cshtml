@@ -1,0 +1,53 @@
+﻿@model GitGardens.Models.User
+
+@{
+    ViewData["Title"] = "Delete Profile";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 class="text-center text-danger mb-4">Delete Account</h2>
+
+            <div class="card shadow border-0">
+                
+                <div class="card-header text-white text-center py-3" style="background-color: #2E8B57;">
+                    <h5 class="mb-0">Are you sure you want to do this?</h5>
+                </div>
+
+                <div class="card-body p-4">
+                    <div class="alert alert-warning border-0 shadow-sm">
+                        <i class="bi bi-exclamation-triangle-fill"></i>
+                        <strong>Warning:</strong> Deleting your profile will remove all your garden metrics and history. This cannot be undone.
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="text-muted small fw-bold text-uppercase">Account to be Deleted</label>
+                        <ul class="list-group list-group-flush border-top mt-2">
+                            <li class="list-group-item px-0">
+                                <strong>Name:</strong> @Model.FullName
+                            </li>
+                            <li class="list-group-item px-0">
+                                <strong>Email:</strong> @Model.Email
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Delete Form -->
+                    <form asp-action="DeleteProfileConfirmed" method="post">
+                        @Html.AntiForgeryToken()
+                        
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-danger py-2 fw-bold">
+                                Yes, Permanently Delete My Account
+                            </button>
+                            <a asp-action="Profile" class="btn btn-outline-secondary py-2">
+                                No, Keep My Account
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+﻿@model List<string>
+
+@{
+    ViewData["Title"] = "Garden Tips";
+}
+
+<div class="container mt-4">
+
+    <h2>
+        🌱 Garden Tips for Garden ID: @ViewBag.GardenId
+    </h2>
+
+    @if (Model == null || Model.Count == 0)
+    {
+        <div class="alert alert-warning">
+            No tips available.
+        </div>
+    }
+    else
+    {
+        <div class="card shadow-sm mt-3">
+
+            <div class="card-header bg-success text-white">
+                Recommended Actions
+            </div>
+
+            <div class="card-body">
+
+                <ul class="list-group">
+
+                    @foreach (var tip in Model)
+                    {
+                        <li class="list-group-item">
+                            🌿 @tip
+                        </li>
+                    }
+
+                </ul>
+
+            </div>
+
+        </div>
+    }
+
+    <br />
+
+    <a asp-controller="Garden"
+           asp-action="GardenList"
+           class="btn btn-secondary">
+        Back to Gardens
+    </a>
+
+</div>

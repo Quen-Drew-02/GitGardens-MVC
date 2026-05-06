@@ -24,14 +24,67 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Garden" asp-action="CreateGarden">Create Garden</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Garden" asp-action="GardenList">My Gardens</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Weather" asp-action="Index">Weather</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                        }
                     </ul>
+
+                    <!-- Right Side -->
+                    <ul class="navbar-nav ms-auto">
+
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+
+                            <li class="nav-item">
+                                <form asp-controller="Account" asp-action="Login" method="post" class="d-inline">
+                                    <button type="submit" class="btn btn-link nav-link">Login</button>
+                                </form>
+                            </li>
+
+                            <li class="nav-item">
+                                <form asp-controller="Account" asp-action="Register" method="post" class="d-inline">
+                                    <button type="submit" class="btn btn-link nav-link">Register</button>
+                                </form>
+                            </li>
+
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <form asp-controller="Account" asp-action="Profile" method="get" class="d-inline">
+                                    <button type="submit" class="btn btn-link nav-link">My Profile</button>
+                                </form>
+                            </li>
+                            <li class="nav-item">
+                                <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
+                                    <button type="submit" class="btn btn-link nav-link">Logout</button>
+                                </form>
+                            </li>
+                        }
+
+                        
+                        
+                        
+                    </ul>
+
                 </div>
             </div>
         </nav>

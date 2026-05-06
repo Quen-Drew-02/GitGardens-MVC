@@ -2,6 +2,7 @@
 using GitGardens.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -102,7 +103,7 @@ namespace GitGardens.Controllers
                 return NotFound();
             }
 
-            var user = await context.Users.Include(u => u.Role).FirstOrDefaultAsync(u => u.Email == email);
+            var user = await context.Users.Include(u => u.Role).Include(u => u.Role).FirstOrDefaultAsync(u => u.Email == email);
 
             if (user == null)
             {
@@ -153,13 +154,15 @@ namespace GitGardens.Controllers
             // Sign user in by creating an Authenticatoon Cookie
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
 
+            return RedirectToAction("Index", "Dashboard");
+
             // Redirect Users Based of Role
             switch (user.Role.RoleName)
             {
                 case "Admin":
-                    return RedirectToAction("Dashboard", "Admin");
+                    return RedirectToAction("Index", "Dashboard");
                 case "User":
-                    return RedirectToAction("Dashboard", "User");
+                    return RedirectToAction("Index", "Dashboard");
                 default:
                     return RedirectToAction("Index", "Home");
             }
@@ -174,6 +177,96 @@ namespace GitGardens.Controllers
             return RedirectToAction("Login", "Account");
         }
 
+
+        //////////////////////////////////////////////////////////Edit Profile//////////////////////////////////////////////////////////
+
+        /*
+        Title: Disclosure of AI Usage in my Assessment.
+        • Section: EditProfile & DeleteProfile.
+        • AI Tool: Gemini
+        • Purpose/intention : Design and framework of EditProfile & DeleteProfile functionalities.
+        • Date(s) 05/05/2026.
+        • https://gemini.google.com/share/75f6e6bedd8e
+        */
+
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> EditProfile()
+        {
+            var email = User.FindFirstValue(ClaimTypes.Email);
+            var user = await context.Users.FirstOrDefaultAsync(u => u.Email == email);
+
+            if (user == null) return NotFound();
+
+            // Map the database User to our Edit ViewModel
+            var model = new EditProfileViewModel
+            {
+                FullName = user.FullName,
+                Email = user.Email
+            };
+
+            return View(model);
+        }
+
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditProfile(EditProfileViewModel model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            var email = User.FindFirstValue(ClaimTypes.Email);
+            var user = await context.Users.FirstOrDefaultAsync(u => u.Email == email);
+
+            if (user == null) return NotFound();
+
+            
+            user.FullName = model.FullName;
+
+            // Only update password if the user typed something in that box
+            if (!string.IsNullOrWhiteSpace(model.NewPassword))
+            {
+                user.Password = passwordHasher.HashPassword(user, model.NewPassword);
+            }
+
+            context.Users.Update(user);
+            await context.SaveChangesAsync();
+
+            TempData["Success"] = "Profile updated successfully!";
+            return RedirectToAction("Profile");
+        }
+
+        //////////////////////////////////////////////////////////Delete Profile//////////////////////////////////////////////////////////
+
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> DeleteProfile()
+        {
+            var email = User.FindFirstValue(ClaimTypes.Email);
+            var user = await context.Users.FirstOrDefaultAsync(u => u.Email == email);
+
+            if (user == null) return NotFound();
+
+            return View(user);
+        }
+
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteProfileConfirmed()
+        {
+            var email = User.FindFirstValue(ClaimTypes.Email);
+            var user = await context.Users.FirstOrDefaultAsync(u => u.Email == email);
+
+            if (user != null)
+            {
+                context.Users.Remove(user);
+                await context.SaveChangesAsync();
+                await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
 
     }
 }

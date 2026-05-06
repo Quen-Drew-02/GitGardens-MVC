@@ -1,0 +1,107 @@
+﻿@model GitGardens.Models.DashboardViewModel
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Garden Overview</h2>
+
+    <!-- KPI Summary Row -->
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 border-start border-5 border-primary h-100">
+                <div class="card-body">
+                    <h6 class="text-muted text-uppercase fw-bold mb-2">Total Gardens</h6>
+                    <h2 class="mb-0">@Model.TotalGardens</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 border-start border-5 border-success h-100">
+                <div class="card-body">
+                    <h6 class="text-muted text-uppercase fw-bold mb-2">Average Health</h6>
+                    <h2 class="mb-0">@Model.AverageHealth%</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 border-start border-5 border-warning h-100">
+                <div class="card-body">
+                    <h6 class="text-muted text-uppercase fw-bold mb-2">Needs Attention (< 50%)</h6>
+                    <h2 class="mb-0 text-warning">@Model.NeedsAttentionCount</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Gardens Section -->
+    <div class="card shadow-sm border-0">
+        <div class="card-header text-white py-3 d-flex justify-content-between align-items-center" style="background-color: #2E8B57;">
+            <h5 class="mb-0">Recent Activity</h5>
+            <a asp-controller="Garden" asp-action="GardenList" class="btn btn-sm btn-light text-success fw-bold">View All</a>
+        </div>
+        
+        <div class="card-body p-0">
+            @if (!Model.RecentGardens.Any())
+            {
+                <div class="p-4 text-center text-muted">
+                    <p>No recent garden data found.</p>
+                    <a asp-controller="Garden" asp-action="CreateGarden" class="btn btn-outline-success mt-2">Create Your First Garden</a>
+                </div>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th class="px-4 py-3">Garden Name</th>
+                                <th class="py-3">Last Updated</th>
+                                <th class="py-3" style="width: 30%;">Health Score</th>
+                                <th class="py-3 text-end px-4">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var garden in Model.RecentGardens)
+                            {
+                                <tr>
+                                    <td class="px-4 fw-bold">@garden.GardenName</td>
+                                    <td class="text-muted">
+                                        @(garden.LastRecordedAt.HasValue
+                                            ? garden.LastRecordedAt.Value.ToString("MMM dd, yyyy HH:mm")
+                                            : "No metrics yet")
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <span class="me-2 fw-bold @(garden.HealthScore > 70 ? "text-success" : garden.HealthScore > 40 ? "text-warning" : "text-danger")">
+                                                @garden.HealthScore%
+                                            </span>
+                                            <div class="progress flex-grow-1" style="height: 8px;">
+                                                <div class="progress-bar @(garden.HealthScore > 70 ? "bg-success" : garden.HealthScore > 40 ? "bg-warning" : "bg-danger")"
+                                                     role="progressbar"
+                                                     style="width: @garden.HealthScore%;"
+                                                     aria-valuenow="@garden.HealthScore"
+                                                     aria-valuemin="0"
+                                                     aria-valuemax="100">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-end px-4">
+                                        <a class="btn btn-sm btn-outline-primary"
+                                               asp-controller="GardenMetrics"
+                                               asp-action="PostMetric"
+                                               asp-route-gardenId="@garden.GardenID">
+                                            Update Metrics
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+</div>

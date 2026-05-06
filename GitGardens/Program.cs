@@ -1,5 +1,9 @@
 using GitGardens.Data;
+using GitGardens.Interface;
 using GitGardens.Models;
+using GitGardens.Repository;
+using GitGardens.Service;
+using GitGardens.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -18,7 +22,7 @@ namespace GitGardens
             // Database context
             builder.Services.AddDbContext<GitGardensDBContext>(options =>
                 options.UseSqlServer(
-                    builder.Configuration.GetConnectionString("DatabaseConnection"))
+                    builder.Configuration.GetConnectionString("DatabaseConnection1"))
                 );
 
 
@@ -34,6 +38,18 @@ namespace GitGardens
             // Password hasher
             builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 
+            // Garden
+            builder.Services.AddScoped<IGardenService, GardenService>();
+            builder.Services.AddScoped<IGardenRepository, GardenRepository>();
+
+            //Garden Metrics
+            builder.Services.AddScoped<IGardenMetricsRepository, GardenMetricsRepository>();
+            builder.Services.AddScoped<IGardenMetricsService, GardenMetricsService>();
+            // Garden Tips
+            builder.Services.AddScoped<IGardenTipsService, GardenTipsService>();
+
+            // Register the WeatherApiService with HttpClient
+            builder.Services.AddHttpClient<IWeatherApiService, WeatherApiService>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
