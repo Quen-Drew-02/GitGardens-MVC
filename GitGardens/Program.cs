@@ -45,6 +45,8 @@ namespace GitGardens
             //Garden Metrics
             builder.Services.AddScoped<IGardenMetricsRepository, GardenMetricsRepository>();
             builder.Services.AddScoped<IGardenMetricsService, GardenMetricsService>();
+            // Garden Tips
+            builder.Services.AddScoped<IGardenTipsService, GardenTipsService>();
 
             // Register the WeatherApiService with HttpClient
             builder.Services.AddHttpClient<IWeatherApiService, WeatherApiService>();
