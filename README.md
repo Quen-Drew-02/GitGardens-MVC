@@ -10,6 +10,8 @@ GitGardens is a production-grade **ASP.NET Core MVC web application** designed t
 - **Secure Authentication**: Login and registration system with role-based access (**Admin / User**).
 - **Session-Based Authorization**: Cookie authentication with protected routes using `[Authorize]`.
 - **Data Ownership Enforcement**: Each user can only access and manage their own gardens.
+- **Live Weather Data:** Real time weather conditions fetched from OpenWeatherMap API.
+- **Smart Garden Tips:** Gardening tips generated based on current weather conditions.
 
 ---
 
