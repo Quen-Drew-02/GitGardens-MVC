@@ -2,6 +2,15 @@
 using GitGardens.Models;
 using System.Text.Json;
 
+/*
+     Title: Disclosure of AI Usage in my Assessment.
+     • Section: WeatherApi Service & WeatherController.
+     • AI Tool: Gemini
+     • Purpose/intention : Design of a Weather Service that fetches weather data from an external API and integrates it into the application.
+     • Date(s) 05/05/2026.
+     • https://chatgpt.com/share/69fb03d0-798c-83ea-8f7b-9ec21b3d39b6
+     */
+
 namespace GitGardens.Services
 {
     public class WeatherApiService : IWeatherApiService
