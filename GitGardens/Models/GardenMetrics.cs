@@ -28,7 +28,7 @@ namespace GitGardens.Models
         public DateTime RecordedAt { get; set; }
 
         [ForeignKey("GardenID")]
-        public Gardens Gardens { get; set; }                  // Navigation Property to Parent Garden
+        public Gardens? Gardens { get; set; }                  // Navigation Property to Parent Garden
 
     }
 }

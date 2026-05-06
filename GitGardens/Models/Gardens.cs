@@ -18,7 +18,7 @@ namespace GitGardens.Models
         public string GardenName { get; set; }
 
         [MaxLength(250)]
-        public string Description { get; set; }           // Optional Description
+        public string? Description { get; set; }           // Optional Description
 
         // Timestamps
         public DateTime CreatedAt { get; set; }
