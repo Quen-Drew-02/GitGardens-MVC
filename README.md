@@ -94,6 +94,32 @@ A weighted scoring model based on environmental inputs:
 | Sunlight    | 10%    |
 | Nitrogen    | 10%    |
 
+## Environmental Thresholds & Advisory Logic
+
+The system monitors various environmental factors to provide real-time agricultural advice. Below are the thresholds and corresponding tips implemented in the system:
+
+### 🪴 Soil & Nutrients
+| Parameter | Threshold | Advisory Tip |
+| :--- | :--- | :--- |
+| **pH** | < 6.0 | Soil is too acidic. Consider adding lime. |
+| **pH** | > 8.0 | Soil is too alkaline. Consider adding sulfur. |
+| **Nitrogen** | < 20 | Nitrogen is low. Consider fertilizing. |
+| **Nitrogen** | > 80 | Too much nitrogen. Reduce fertilizer use. |
+
+### 💧 Moisture & Humidity
+| Parameter | Threshold | Advisory Tip |
+| :--- | :--- | :--- |
+| **Moisture** | < 30% | Soil is too dry. Increase watering. |
+| **Moisture** | > 80% | Soil is too wet. Reduce watering. |
+| **Humidity** | < 30% | Air is too dry. Consider misting plants. |
+| **Humidity** | > 80% | Humidity is too high. Ensure proper airflow. |
+
+### 🌡️ Temperature
+| Parameter | Threshold | Advisory Tip |
+| :--- | :--- | :--- |
+| **Temperature** | < 10°C | Temperature is too low. Consider protecting plants. |
+| **Temperature** | > 35°C | Temperature is too high. Provide shade or water more frequently. |
+
 ### Ideal Ranges
 - **pH**: 6.0 – 7.5  
 - **Temperature**: 18°C – 26°C  
